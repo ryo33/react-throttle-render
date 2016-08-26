@@ -1,5 +1,7 @@
 # react-throttle-props
-Throttle the number of times a component receives new props not to call `render()` too many times.
+[![npm version](https://badge.fury.io/js/react-throttle-props.svg)](https://badge.fury.io/js/react-throttle-props)  
+  
+Throttle the number of times a component receives new props not to call `render()` too many times.  
 
 ## Description
 It may enhance the performance under the following conditions.
