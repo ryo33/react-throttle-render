@@ -9,18 +9,10 @@ function throttle(component, wait) {
   class Throttle extends Component {
     constructor(props, context) {
       super(props, context)
-      this.state = { props }
-      this.countDown = 0
-      this.lastTime = Date.now()
-      this.nextProps = null
-      this.timeout = null
-      this.useNextProps = this.useNextProps.bind(this)
-    }
-
-    useNextProps() {
-      this.setState({ props: this.nextProps })
       this.countDown = wait
       this.lastTime = Date.now()
+      this.timeout = null
+      this.update = this.update.bind(this)
     }
 
     clearTimer() {
@@ -30,32 +22,42 @@ function throttle(component, wait) {
       }
     }
 
+    update() {
+      this.countDown = wait
+      this.lastTime = Date.now()
+      this.timeout = null
+      this.forceUpdate()
+    }
+
     componentWillMount() {
-      if (this.nextProps !== null) {
-        this.useNextProps()
-      }
+      this.forceUpdate()
     }
 
     componentWillUnmount() {
       this.clearTimer()
     }
 
-    componentWillReceiveProps(props) {
-      this.clearTimer()
-      this.nextProps = props
+    shouldComponentUpdate() {
+      if (this.timeout !== null) {
+        clearTimeout(this.timeout)
+        this.timeout = null
+      }
       const now = Date.now()
       this.countDown -= now - this.lastTime
       this.lastTime = now
+
       if (this.countDown <= 0) {
-        this.useNextProps()
+        this.countDown = wait
+        this.lastTime = Date.now()
+        return true
       } else {
-        this.timeout = setTimeout(this.useNextProps, this.countDown)
+        this.timeout = setTimeout(this.update, this.countDown)
+        return false
       }
     }
 
     render() {
-      const { props } = this.state
-      return createElement(component, props)
+      return createElement(component, this.props)
     }
   }
 
