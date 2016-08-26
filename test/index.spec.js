@@ -27,9 +27,17 @@ describe('throttle', function() {
       this.state = { value: '1' }
     }
 
+    unmount() {
+      this.refs.throttled.componentWillUnmount()
+    }
+
+    mount() {
+      this.refs.throttled.componentWillMount()
+    }
+
     render() {
       const { value } = this.state
-      return React.createElement(Throttled, { value })
+      return React.createElement(Throttled, { value, ref: "throttled" })
     }
   }
 
@@ -76,8 +84,6 @@ describe('throttle', function() {
     const component = TestUtils.renderIntoDocument(
       React.createElement(Wrapper)
     )
-    expect(getValue(component)).to.equal('1')
-
     component.setState({ value: '2' })
     expect(getValue(component)).to.equal('2')
 
@@ -96,5 +102,20 @@ describe('throttle', function() {
     component.setState({ value: '7' })
     clock.tick(2)
     expect(getValue(component)).to.equal('7')
+  })
+
+  it('should not update the props while unmounting', function() {
+    const component = TestUtils.renderIntoDocument(
+      React.createElement(Wrapper)
+    )
+    component.setState({ value: '2' })
+    expect(getValue(component)).to.equal('2')
+
+    component.setState({ value: '3' })
+    component.unmount()
+    clock.tick(10)
+    expect(getValue(component)).to.equal('2')
+    component.mount()
+    expect(getValue(component)).to.equal('3')
   })
 })

@@ -20,15 +20,28 @@ function throttle(component, wait) {
     useNextProps() {
       this.setState({ props: this.nextProps })
       this.countDown = wait
-      this.timeout = null
       this.lastTime = Date.now()
     }
 
-    componentWillReceiveProps(props) {
-      if (typeof this.timeout === "number") {
+    clearTimer() {
+      if (this.timeout !== null) {
         clearTimeout(this.timeout)
         this.timeout = null
       }
+    }
+
+    componentWillMount() {
+      if (this.nextProps !== null) {
+        this.useNextProps()
+      }
+    }
+
+    componentWillUnmount() {
+      this.clearTimer()
+    }
+
+    componentWillReceiveProps(props) {
+      this.clearTimer()
       this.nextProps = props
       const now = Date.now()
       this.countDown -= now - this.lastTime

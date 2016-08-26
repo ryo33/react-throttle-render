@@ -1,6 +1,6 @@
 {
   "name": "react-throttle-props",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Throttle the number of times a component receives new props.",
   "main": "./lib/index.js",
   "files": [
