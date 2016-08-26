@@ -1,7 +1,7 @@
-# react-throttle-props
-[![npm version](https://badge.fury.io/js/react-throttle-props.svg)](https://badge.fury.io/js/react-throttle-props)  
+# react-throttle-render
+[![npm version](https://badge.fury.io/js/react-throttle-render.svg)](https://badge.fury.io/js/react-throttle-render)  
   
-Throttle the number of times a component receives new props not to call `render()` too many times.  
+Throttle the number of times `render()` is called.  
 
 ## Description
 It may enhance the performance under the following conditions.
@@ -9,11 +9,11 @@ It may enhance the performance under the following conditions.
 - The component has a huge or slow `render()`.
 
 ## Installation
-`npm i --save react-throttle-props`
+`npm i --save react-throttle-render`
 
 ## Usage
 ```javascript
-import throttle from 'react-throttle-props'
+import throttle from 'react-throttle-render'
 
 const ThrottledComponent = throttle(VeryBigRenderComponent, 50)
 ```

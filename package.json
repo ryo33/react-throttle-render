@@ -1,7 +1,7 @@
 {
-  "name": "react-throttle-props",
+  "name": "react-throttle-render",
   "version": "1.1.0",
-  "description": "Throttle the number of times a component receives new props.",
+  "description": "Throttle the number of rendering times.",
   "main": "./lib/index.js",
   "files": [
     "lib",
@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ryo33/react-throttle-props.git"
+    "url": "git+https://github.com/ryo33/react-throttle-render.git"
   },
   "keywords": [
     "react",
@@ -43,7 +43,7 @@
     "sinon": "^1.17.5"
   },
   "bugs": {
-    "url": "https://github.com/ryo33/react-throttle-props/issues"
+    "url": "https://github.com/ryo33/react-throttle-render/issues"
   },
-  "homepage": "https://github.com/ryo33/react-throttle-props#readme"
+  "homepage": "https://github.com/ryo33/react-throttle-render#readme"
 }
