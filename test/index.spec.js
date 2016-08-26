@@ -114,5 +114,11 @@ describe('throttle', function() {
     component.unmount()
     component.mount()
     expect(getValue(component)).to.equal('3')
+
+    component.setState({ value: '4' })
+    clock.tick(9)
+    expect(getValue(component)).to.equal('3')
+    clock.tick(1)
+    expect(getValue(component)).to.equal('4')
   })
 })

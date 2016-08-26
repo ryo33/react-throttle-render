@@ -22,15 +22,19 @@ function throttle(component, wait) {
       }
     }
 
-    update() {
+    beforeUpdate() {
       this.countDown = wait
       this.lastTime = Date.now()
+    }
+
+    update() {
+      this.beforeUpdate()
       this.timeout = null
       this.forceUpdate()
     }
 
     componentWillMount() {
-      this.forceUpdate()
+      this.update()
     }
 
     componentWillUnmount() {
@@ -38,17 +42,14 @@ function throttle(component, wait) {
     }
 
     shouldComponentUpdate() {
-      if (this.timeout !== null) {
-        clearTimeout(this.timeout)
-        this.timeout = null
-      }
+      this.clearTimer()
+
       const now = Date.now()
       this.countDown -= now - this.lastTime
       this.lastTime = now
 
       if (this.countDown <= 0) {
-        this.countDown = wait
-        this.lastTime = Date.now()
+        this.beforeUpdate()
         return true
       } else {
         this.timeout = setTimeout(this.update, this.countDown)
