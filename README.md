@@ -20,10 +20,11 @@ const ThrottledComponent = throttle(VeryBigRenderComponent, 50)
 
 ## API
 
-### `throttle(component, wait) => wrappedComponent`
-- `component` The source React component  
-- `wait` The number of milliseconds to throttle  
+### `throttle(component, wait[, option]) => wrappedComponent`
+- `component` The source React component
+- `wait` The number of milliseconds to throttle
 - `wrappedComponent` The throttled React component
+- `option` The option for lodash.throttle
 
 ## License
 MIT
