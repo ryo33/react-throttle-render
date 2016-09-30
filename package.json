@@ -9,9 +9,9 @@
   ],
   "scripts": {
     "build": "babel src --out-dir lib",
-    "test": "mocha --compilers js:babel-register --recursive ./test/*.spec.js",
+    "test": "mocha --compilers js:babel-register --recursive -r jsdom-global/register ./test/*.spec.js",
     "test:watch": "npm test -- --watch",
-    "prepublish": "npm run build"
+    "prepublish": "npm test && npm run build"
   },
   "repository": {
     "type": "git",
@@ -29,7 +29,8 @@
     "react": "^15.0"
   },
   "dependencies": {
-    "hoist-non-react-statics": "^1.2.0"
+    "hoist-non-react-statics": "^1.2.0",
+    "lodash.throttle": "^4.1.1"
   },
   "devDependencies": {
     "babel-cli": "^6.9.0",
@@ -37,8 +38,9 @@
     "babel-register": "^6.9.0",
     "chai": "^3.5.0",
     "jsdom": "^9.4.2",
+    "jsdom-global": "^2.1.0",
     "mocha": "^3.0.2",
-    "mocha-jsdom": "^1.1.0",
+    "react": "^15.3.2",
     "react-addons-test-utils": "^15.3.1",
     "sinon": "^1.17.5"
   },

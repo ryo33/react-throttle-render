@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import TestUtils from 'react-addons-test-utils'
-import jsdom from 'mocha-jsdom'
 import sinon from 'sinon'
 import { expect } from 'chai'
 
@@ -12,8 +11,6 @@ before(function () { clock = sinon.useFakeTimers() })
 after(function () { clock.restore() })
 
 describe('throttle', function() {
-  jsdom()
-
   const Throttled = throttle(class extends Component {
     render() {
       const { value } = this.props
@@ -58,22 +55,20 @@ describe('throttle', function() {
     )
     expect(getValue(component)).to.equal('1')
 
-    component.setState({ value: '2' })
+    component.setState({value: '2'})
     expect(getValue(component)).to.equal('1')
     clock.tick(9)
     expect(getValue(component)).to.equal('1')
     clock.tick(1)
     expect(getValue(component)).to.equal('2')
 
-    component.setState({ value: '3' })
-    expect(getValue(component)).to.equal('2')
-    clock.tick(9)
-    expect(getValue(component)).to.equal('2')
-    clock.tick(1)
+    component.setState({value: '3'})
     expect(getValue(component)).to.equal('3')
 
-    clock.tick(10)
-    component.setState({ value: '4' })
+    component.setState({value: '4'})
+    clock.tick(9)
+    expect(getValue(component)).to.equal('3')
+    clock.tick(1)
     expect(getValue(component)).to.equal('4')
   })
 
