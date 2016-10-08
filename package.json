@@ -1,6 +1,6 @@
 {
   "name": "react-throttle-render",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Throttle the number of rendering times.",
   "main": "./lib/index.js",
   "files": [
