@@ -11,12 +11,12 @@ before(function () { clock = sinon.useFakeTimers() })
 after(function () { clock.restore() })
 
 describe('throttle', function() {
-  const Throttled = throttle(class extends Component {
+  const Throttled = throttle(10)(class extends Component {
     render() {
       const { value } = this.props
       return React.createElement('span', null, value)
     }
-  }, 10)
+  })
 
   class Wrapper extends Component {
     constructor(props, context) {

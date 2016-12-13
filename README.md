@@ -15,16 +15,16 @@ It may enhance the performance under the following conditions.
 ```javascript
 import throttle from 'react-throttle-render'
 
-const ThrottledComponent = throttle(VeryBigRenderComponent, 50)
+const ThrottledComponent = throttle(50)(VeryBigRenderComponent)
 ```
 
 ## API
 
-### `throttle(component, wait[, option]) => wrappedComponent`
-- `component` The source React component
+### `throttle(wait[, option]) => component => wrappedComponent`
 - `wait` The number of milliseconds to throttle
-- `wrappedComponent` The throttled React component
 - `option` The option for lodash.throttle
+- `component` The source React component
+- `wrappedComponent` The throttled React component
 
 ## License
 MIT
