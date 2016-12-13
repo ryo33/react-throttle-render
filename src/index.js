@@ -13,6 +13,9 @@ function throttleProps(component, wait, options) {
       this.state = {}
       this.throttledSetState = throttle(nextState => this.setState(nextState), wait, options)
     }
+    shouldComponentUpdate(nextProps, nextState) {
+      return this.state !== nextState
+    }
     componentWillMount() {
       this.throttledSetState({props: this.props})
     }
